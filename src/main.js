@@ -249,14 +249,14 @@ document.querySelector("#marketplace").addEventListener("click", async (e) => {
     const index = e.target.id
     notification("⌛ Waiting for payment approval...")
     try {
-      await approve(products[_index].price)
+      await approve(products[index].price)
     } catch (error) {
       notification(`⚠️ ${error}.`)
     }
     notification(`⌛ Awaiting payment for "${products[index].name}"...`)
     try {
       const result = await contract.methods
-      .buyProducts(index)
+      .buyProduct(index)
       .send({ from: kit.defaultAccount })
       notification(`🎉 You successfully bought "${products[index].name}".`)
       getProducts()
